@@ -15,3 +15,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 $ git add .
 
 $ git commit -m "Added commands to initialize git repository, add files to staging area and commit"
+
+$ git branch basic-branching
+
+$ git checkout basic-branching
+Switched to branch 'basic-branching'
