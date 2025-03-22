@@ -20,3 +20,29 @@ $ git branch basic-branching
 
 $ git checkout basic-branching
 Switched to branch 'basic-branching'
+
+$ git add .
+
+$ git commit -m "Added commands to create and move to new branch"
+
+$ git checkout main
+Switched to branch 'main'
+
+$ git merge basic-branching
+Updating e8e4159..7473596
+Fast-forward
+ commands.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+$ git log
+commit 7473596bed158ecaf6abd0b1e82250a9eb285285 (HEAD -> main, basic-branching)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 01:11:33 2025 +0530
+
+    Added commands to create and move to new branch
+
+commit e8e4159277c0b865bb9d42033d9f20e6a0bbc810
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 01:02:39 2025 +0530
+
+    Added commands to initialize git repository, add files to staging area and commit
