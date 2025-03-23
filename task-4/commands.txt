@@ -1,0 +1,47 @@
+## Creating two branches from the same commit ##
+$ git branch branch-1
+
+$ git branch branch-2
+
+## Making changes in branch-1 ##
+$ git checkout branch-1
+Switched to branch 'branch-1'
+
+$ git add test.txt
+
+$ git commit -m "Task-4 changes in branch-1"
+[branch-1 b96a187] Task-4 changes in branch-1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+## Making changes in branch-2 ##
+$ git checkout branch-2
+Switched to branch 'branch-2'
+
+$ git add test.txt
+
+$ git commit -m "Task-4 changes in branch-2"
+[branch-2 c0af052] Task-4 changes in branch-2
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+## merging branch-1 into main ##
+$ git checkout main
+Switched to branch 'main'
+
+$ git merge branch-1
+Updating 4bfc83f..b96a187
+Fast-forward
+ task-4/test.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+## merging branch-2 into main ##
+$ git merge branch-2
+Auto-merging task-4/test.txt
+CONFLICT (content): Merge conflict in task-4/test.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+## After resolving merge conflict ##
+$ git add test.txt
+
+$ git commit -m "Task-4 merged branch-1 and branch-2 into main"
+[main 06e17f5] Task-4 merged branch-1 and branch-2 into main
+ 1 file changed, 1 insertion(+), 1 deletion(-)
