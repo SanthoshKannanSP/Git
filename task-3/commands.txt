@@ -1,0 +1,62 @@
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   a.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git restore a.txt
+
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+## To try reverting commits, creating a new temporary commit ##
+
+$ git add a.txt
+
+$ git commit -m "Task-3 temporary commit that will be reverting"
+
+$ git log -2
+commit a370baee0de18af84a493be819d50dce0a237fc9 (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 17:21:59 2025 +0530
+
+    Task-3 temporary commit that will be reverting
+
+commit c98a37e28c0b99ab9ddb90960da04e0d555639a4 (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 17:11:32 2025 +0530
+
+    Initial commit for task-3
+
+$ git reset HEAD
+[main 2114f39] Revert "Task-3 temporary commit that will be reverting"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git log
+commit 2114f39f4268db0edb7388cff0c9aac25d6e88ac (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 17:25:49 2025 +0530
+
+    Revert "Task-3 temporary commit that will be reverting"
+    
+    This reverts commit a370baee0de18af84a493be819d50dce0a237fc9.
+
+commit a370baee0de18af84a493be819d50dce0a237fc9
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 17:21:59 2025 +0530
+
+    Task-3 temporary commit that will be reverting
+
+commit c98a37e28c0b99ab9ddb90960da04e0d555639a4 (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 17:11:32 2025 +0530
+
+    Initial commit for task-3
