@@ -1,0 +1,102 @@
+$ git log -3
+commit 6de6bfe4beb05c89bdb0bf3e2d28eb57ceef1207 (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:19:17 2025 +0530
+
+    Task-5 added references in readme
+
+commit f865727227619e063e14bd1095d68782ea20b175
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:17:17 2025 +0530
+
+    Task-5 added reade
+
+commit f102da7830cb43829e287cf3cc83d1c2ce0a1e0b (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 21:54:03 2025 +0530
+
+    Task-4 added commands and readme
+
+## Fixing the typo on the penultimate commit ##
+$ git rebase -i f102da7
+[detached HEAD f9e88fe] Task-5 added readme
+ Date: Sun Mar 23 23:17:17 2025 +0530
+ 1 file changed, 65 insertions(+)
+ create mode 100644 task-5/README.md
+
+$ git log -3
+commit f7ef3a1966266c91048b4fc7af370df82f461e5e (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:19:17 2025 +0530
+
+    Task-5 added references in readme
+
+commit f9e88fe6cae29998c3c778597de20080d0db5927
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:17:17 2025 +0530
+
+    Task-5 added readme
+
+commit f102da7830cb43829e287cf3cc83d1c2ce0a1e0b (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 21:54:03 2025 +0530
+
+    Task-4 added commands and readme
+
+## Squashing the last two commits into a single commit ##
+$ git rebase -i f102da7
+[detached HEAD eba11dd] Task-5 added readme
+ Date: Sun Mar 23 23:17:17 2025 +0530
+ 1 file changed, 71 insertions(+)
+ create mode 100644 task-5/README.md
+Successfully rebased and updated refs/heads/main.
+
+$ git log -3
+commit eba11dd3176db745689b6a622283baacd80c68bd (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:17:17 2025 +0530
+
+    Task-5 added readme
+
+commit f102da7830cb43829e287cf3cc83d1c2ce0a1e0b (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 21:54:03 2025 +0530
+
+    Task-4 added commands and readme
+
+commit 06e17f57f99344086fe677853634f256643b461a
+Merge: b96a187 c0af052
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Mon Mar 24 00:57:42 2025 +0530
+
+    Task-4 merged branch-1 and branch-2 into main
+
+## Fixing mistakes in the readme file of the previous commit ##
+$ git add README.md
+
+$ git commit --fixup eba11dd
+[main f9abc0a] fixup! Task-5 added readme
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+$ git rebase -i f102da7 --autosquash
+Successfully rebased and updated refs/heads/main.
+
+$ git log -3
+commit acb0f5ea95cc6099936dd457d18c2386f947b4f4 (HEAD -> main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 23:17:17 2025 +0530
+
+    Task-5 added readme
+
+commit f102da7830cb43829e287cf3cc83d1c2ce0a1e0b (origin/main)
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Sun Mar 23 21:54:03 2025 +0530
+
+    Task-4 added commands and readme
+
+commit 06e17f57f99344086fe677853634f256643b461a
+Merge: b96a187 c0af052
+Author: SanthoshKannanSP <mail2santhoshkannan@gmail.com>
+Date:   Mon Mar 24 00:57:42 2025 +0530
+
+    Task-4 merged branch-1 and branch-2 into main
