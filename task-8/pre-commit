@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if git diff --cached --name-only | grep -q '.env$'; then
+  echo "ERROR: Do not commit .env files!"
+  exit 1
+fi
+
+exit 0
