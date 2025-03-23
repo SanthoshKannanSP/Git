@@ -1,0 +1,6 @@
+# ignoring all .log files except the build logs
+**/*.log
+!logs/build/build.log
+
+# ignoring the .env file
+.env
