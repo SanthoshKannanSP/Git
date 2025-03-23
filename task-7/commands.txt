@@ -1,0 +1,23 @@
+## Viewing the commit history of the main branch ##
+$ git log --oneline -3
+4983e03 Task-7 added readme
+34e1947 (origin/main) Task-6 added commands
+b7627c8 Task-6 added readme and file to test stash
+
+## Viewing the commit history of the learn-cherry-pick branch ##
+$ git log learn-cherry-pick --oneline -3
+10a9ca0 (origin/learn-cherry-pick, learn-cherry-pick) Task-7 added unnecessary file
+b550b2b Task-7 added bug fix
+4983e03 (HEAD -> main) Task-7 added readme
+
+## Cherry picking the bug fix commit and applying it to main ##
+$ git cherry-pick b550b2b
+[main 5fb2873] Task-7 added bug fix
+ Date: Mon Mar 24 00:45:06 2025 +0530
+ 1 file changed, 1 insertion(+)
+ create mode 100644 task-7/bug-fix.txt
+
+$ git log --oneline -3
+5fb2873 (HEAD -> main) Task-7 added bug fix
+4983e03 Task-7 added readme
+34e1947 (origin/main) Task-6 added commands
