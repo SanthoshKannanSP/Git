@@ -1,1 +1,1 @@
-This file will be used to simulate and resolve merge conflict. This will be the change made in branch-1.
+This file will be used to simulate and resolve merge conflict. This will be the change made in branch-1. This will be the change made in branch-2.
