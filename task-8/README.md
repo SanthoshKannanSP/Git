@@ -17,3 +17,10 @@ Hooks that are run on the server machine hosting the remote repository before or
 
 ## Hook scripts
 Hooks scripts can be written in any comfortable scripting language like shell scripts, Python or Node. These scripts have to be properly named and should be placed inside the `.git/hooks` folder of the git repository.
+
+## How Git hooks improve code quality
+- Prevents inconsistent code styles by running formatters automatically
+- Prevents bad code for being commited by enforcing linting rules
+- Ensures commit messages follow a pre-defined structured format
+- Prevents breaking changes by running tests before code is pushed
+- Prevents accidental commiting of sensitive data, credentials or API keys
