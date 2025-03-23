@@ -1,0 +1,46 @@
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   a.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+## Stashing the modified file and changing branch ##
+$ git stash
+Saved working directory and index state WIP on main: b7627c8 Task-6 added readme and file to test stash
+
+$ git stash list
+stash@{0}: WIP on main: b7627c8 Task-6 added readme and file to test stash
+
+$ git status
+On branch main
+nothing to commit, working tree clean
+
+## Checking out to another branch and doing some work ##
+$ git branch learn-stash
+
+$ git checkout learn-stash
+Switched to branch 'learn-stash'
+
+$ git add b.txt
+
+$ git commit -m "Task-6 add file only present in learn-stash branch"
+[learn-stash d65f034] Task-6 add file only present in learn-stash branch
+ Date: Mon Mar 24 00:15:10 2025 +0530
+ 1 file changed, 1 insertion(+)
+ create mode 100644 task-6/b.txt
+
+## Moving to the main branch and applying the stash ##
+$ git checkout main
+Switched to branch 'main'
+
+$ git stash pop
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   a.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (8a6950a510edf4c3ef3b210995cd6e5937fdb203)
