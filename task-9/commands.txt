@@ -1,0 +1,9 @@
+## Adding remote to the local repository ##
+$ git remote add origin git@github.com:SanthoshKannanSP/Git.git
+
+$ git remote -v
+origin	git@github.com:SanthoshKannanSP/Git.git (fetch)
+origin	git@github.com:SanthoshKannanSP/Git.git (push)
+
+## Creating a feature branch and pushing local changes ##
+$ git branch feature
