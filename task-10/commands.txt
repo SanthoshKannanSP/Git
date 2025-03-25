@@ -1,0 +1,140 @@
+## The simulation has 3 branches main, feature-x, bugfix-y ##
+## The feature-x and bugfix-y have both been branched from the latest commit of main ##
+## Both the feature-x and bugfix-y branches are several commits ahead of main ##
+## After the completion of feature-x, the branch has been merged into the main branch and has been pushed to the remote ##
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+$ git merge feature-x
+Updating db91c22..e183d4b
+Fast-forward
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 416 bytes | 416.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:SanthoshKannanSP/Git.git
+   db91c22..e183d4b  main -> main
+
+$ git log --oneline -3
+e183d4b (HEAD -> main, origin/main, feature-x) Task-10 implemented feature
+db91c22 Task-10 initial commit on main
+43476eb Task-9 updated commands
+
+## Since feature-x branch has been merged, the branch is then deleted ##
+$ git branch -d feature-x
+Deleted branch feature-x (was e183d4b).
+
+## The people working on the bugfix-y branch are unaware of the merge and push to the main branch ##
+## After the completion of bugfix-y, the branch has been merged into the main branch and force pushed to the remote ##
+$ git checkout main
+Switched to branch 'main'
+
+$ git merge bugfix-y
+Updating db91c22..d430622
+Fast-forward
+ task-10/index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git push --force
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 389 bytes | 389.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:SanthoshKannanSP/Git.git
+ + e183d4b...d430622 main -> main (forced update)
+
+## Now the feature-x branch and the merged commits are both lost in the remote repository ##
+$ git log --oneline -3
+d430622 (HEAD -> main, origin/main, bugfix-y) Task-10 fixed bug
+db91c22 Task-10 initial commit on main
+43476eb Task-9 updated commands
+
+$ git branch
+  bugfix-y
+* main
+
+## Recovering the lost feature-x branch using reflog##
+## Identify the commit hash of the tip of feature-x branch using reflog ##
+$ git reflog
+e183d4b (HEAD -> main, origin/main, feature-x) HEAD@{0}: merge feature-x: Fast-forward
+db91c22 HEAD@{1}: checkout: moving from feature-x to main
+e183d4b HEAD@{2}: commit: Task-10 implemented feature
+db91c22 HEAD@{3}: checkout: moving from main to feature-x
+
+## Creating a recovery branch to recover the lost commits ##
+$ git checkout -b recovery-feature-x e183d4b
+Switched to a new branch 'recovery-feature-x'
+
+$ git log --oneline -3
+e183d4b (HEAD -> recovery-feature-x) Task-10 implemented feature
+db91c22 Task-10 initial commit on main
+43476eb Task-9 updated commands
+
+## Now we can rebase the recovery-feature-x branch to the main branch ##
+interactive rebase in progress; onto d430622
+Last command done (1 command done):
+   pick e183d4b Task-10 implemented feature
+No commands remaining.
+You are currently rebasing branch 'recovery-feature-x' on 'd430622'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both modified:   index.html
+
+## After resolving the merge conflict ##
+$ git rebase --continue
+Successfully rebased and updated refs/heads/recovery-feature-x.
+
+$ git log --oneline -3
+39f433a (HEAD -> recovery-feature-x) Task-10 implemented feature
+d430622 (origin/main, main, bugfix-y) Task-10 fixed bug
+db91c22 Task-10 initial commit on main
+
+## Now we can merge the recovery-feature-x branch to the main branch ##
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+$ git merge recovery-feature-x
+Updating d430622..39f433a
+Fast-forward
+ task-10/index.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 421 bytes | 421.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:SanthoshKannanSP/Git.git
+   d430622..39f433a  main -> main
+
+$ git log --oneline -4
+39f433a (HEAD -> main, origin/main, recovery-feature-x) Task-10 implemented feature
+d430622 (bugfix-y) Task-10 fixed bug
+db91c22 Task-10 initial commit on main
+43476eb Task-9 updated commands
+
+
+
+
+
+
